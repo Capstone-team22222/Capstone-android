@@ -1,67 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/main_screen.dart';
+import 'screens/alarm_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget{
   const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MainScreenState();
+}
 
+class _MainScreenState extends State<MyApp>{
+  int currentIndex = 0;
+  final screens = [
+    MainPage(),
+    AlarmPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+      debugShowCheckedModeBanner: false,
+      title: 'Sleep Tracker',
+      home: Scaffold(backgroundColor: Color(0xffe9edf3),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.grey,
+        title: Text("Sleep Tracker",
+         style: TextStyle(
+          color: Colors.black,),
+          ),
+        ),
+        body: screens[currentIndex],
+        bottomNavigationBar:
+          BottomNavigationBar(backgroundColor: Colors.grey, selectedItemColor: Colors.white,unselectedItemColor: Colors.black,
+          currentIndex: currentIndex, onTap: (index) => setState(() => currentIndex = index), items:[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "홈",
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.alarm),
+              label: "알람",
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

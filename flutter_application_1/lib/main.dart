@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alarm_clock/flutter_alarm_clock.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,11 +32,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  //TextField의 정보를 가져오기 위한 controller
+  TextEditingController hourController = TextEditingController();
+  TextEditingController minuteController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,20 +48,43 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            TextField(
+              controller: hourController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'Hour',
+              ),
+
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            TextField(
+              controller: minuteController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'Minutes',
+              ),
+            ),
+            ElevatedButton(
+              child: const Text(
+                '알람 설정',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onPressed: () {
+                FlutterAlarmClock.createAlarm(hour:int.parse(hourController.text), minutes:int.parse(minuteController.text));
+              },
+
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // show alarm
+                FlutterAlarmClock.showAlarms();
+              },
+              child: const Text(
+                '알람 보기',
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

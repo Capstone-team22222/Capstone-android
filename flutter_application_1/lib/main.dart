@@ -22,13 +22,13 @@ class _MainScreenState extends State<MyApp>{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Sleep Tracker',
+      title: '수면 추적',
       home: Scaffold(backgroundColor: Color(0xffe9edf3),
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.grey,
-        title: Text("Sleep Tracker",
+        title: Text("수면 추적",
          style: TextStyle(
           color: Colors.black,),
           ),

@@ -13,7 +13,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       theme: ThemeData(useMaterial3: false),
-      home: const ExampleAlarmHomeScreen(),
+      home: const AlarmHomeScreen(),
     ),
   );
 }

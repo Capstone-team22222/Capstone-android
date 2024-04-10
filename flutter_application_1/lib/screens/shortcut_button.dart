@@ -2,19 +2,19 @@ import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
 import 'package:flutter/material.dart';
 
-class ExampleAlarmHomeShortcutButton extends StatefulWidget {
+class AlarmHomeShortcutButton extends StatefulWidget {
   final void Function() refreshAlarms;
 
-  const ExampleAlarmHomeShortcutButton({Key? key, required this.refreshAlarms})
+  const AlarmHomeShortcutButton({Key? key, required this.refreshAlarms})
       : super(key: key);
 
   @override
-  State<ExampleAlarmHomeShortcutButton> createState() =>
-      _ExampleAlarmHomeShortcutButtonState();
+  State<AlarmHomeShortcutButton> createState() =>
+      _AlarmHomeShortcutButtonState();
 }
 
-class _ExampleAlarmHomeShortcutButtonState
-    extends State<ExampleAlarmHomeShortcutButton> {
+class _AlarmHomeShortcutButtonState
+    extends State<AlarmHomeShortcutButton> {
   bool showMenu = false;
 
   Future<void> onPressButton(int delayInHours) async {
@@ -33,7 +33,7 @@ class _ExampleAlarmHomeShortcutButtonState
       dateTime: dateTime,
       assetAudioPath: 'assets/marimba.mp3',
       volume: volume,
-      notificationTitle: 'Alarm example',
+      notificationTitle: 'Alarm',
       notificationBody:
           'Shortcut button alarm with delay of $delayInHours hours',
     );

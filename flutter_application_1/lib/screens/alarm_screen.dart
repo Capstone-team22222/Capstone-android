@@ -117,7 +117,7 @@ class _AlarmPageState extends State<AlarmPage> {
       body: SafeArea(
           child: Column(
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

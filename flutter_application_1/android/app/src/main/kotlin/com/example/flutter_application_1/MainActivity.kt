@@ -1,27 +1,46 @@
 package com.example.flutter_application_1
 
 import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
+import ai.asleep.asleepsdk.Asleep
+import ai.asleep.asleepsdk.data.AsleepConfig
+import ai.asleep.asleepsdk.AsleepErrorCode
+
 
 class MainActivity: FlutterActivity(){
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) { //현재 버전 >= api level 27
-//            setShowWhenLocked(true)
-//            setTurnScreenOn(true)
-//            window.addFlags(WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON)
-//        } else {
-//            window.addFlags(
-//                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED    // deprecated api 27
-//                            or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD     // deprecated api 26
-//                            or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON   // deprecated api 27
-//                            or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
-//            )
-//        }
-//        val keyguardMgr = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            keyguardMgr.requestDismissKeyguard(this, null)
-//        }
-//    }
+    private val CHANNEL = "com.example.myapp/native"
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
+                call, result ->
+            when (call.method) {
+                "createInstance" -> {
+                    Asleep.initAsleepConfig(
+                        context = applicationContext,
+                        apiKey = "api key",
+                        userId = null,
+                        baseUrl = null,
+                        callbackUrl = null,
+                        service = "[input your AppName]",
+                        object : Asleep.AsleepConfigListener {
+                            override fun onSuccess(userId: String?, asleepConfig: AsleepConfig?) {
+
+                                /* save userId and asleepConfig */
+
+                            }
+                            override fun onFail(errorCode: Int, detail: String) {
+
+                            }
+                        })
+
+                }
+                else -> result.notImplemented()
+            }
+        }
+    }
+
 
 }

@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: "홈",
+              label: "수면 기록",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.alarm),
